@@ -1,0 +1,92 @@
+/* Monochrome black & white theme. */
+:root {
+  --sl-color-accent-low: #2a2a2a;
+  --sl-color-accent: #e7e7e7;
+  --sl-color-accent-high: #ffffff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #ededed;
+  --sl-color-gray-2: #c2c2c2;
+  --sl-color-gray-3: #8b8b8b;
+  --sl-color-gray-4: #585858;
+  --sl-color-gray-5: #383838;
+  --sl-color-gray-6: #252525;
+  --sl-color-black: #121212;
+  /* Neutralize Starlight's themed text-accent links to plain white. */
+  --sl-color-text-accent: #ffffff;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #dcdcdc;
+  --sl-color-accent: #1a1a1a;
+  --sl-color-accent-high: #000000;
+  --sl-color-white: #000000;
+  --sl-color-gray-1: #1a1a1a;
+  --sl-color-gray-2: #2b2b2b;
+  --sl-color-gray-3: #5c5c5c;
+  --sl-color-gray-4: #8b8b8b;
+  --sl-color-gray-5: #d8d8d8;
+  --sl-color-gray-6: #f0f0f0;
+  --sl-color-gray-7: #f9f9f9;
+  --sl-color-black: #ffffff;
+  --sl-color-text-accent: #000000;
+}
+
+/* Soft monochrome glow behind the splash hero. */
+.hero {
+  position: relative;
+  --glow: color-mix(in oklab, var(--sl-color-white) 12%, transparent);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 460px;
+  background: radial-gradient(50% 60% at 60% 0%, var(--glow), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--sl-color-white), var(--sl-color-gray-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root[data-theme='light'] .hero h1 {
+  background: linear-gradient(180deg, var(--sl-color-black), var(--sl-color-gray-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Slightly rounder cards. */
+.card {
+  border-radius: 0.75rem;
+}
+
+/* Bigger, airier sidebar — fills the sparse nav. */
+.sidebar-content {
+  padding-top: 0.5rem;
+}
+/* Section group labels (Start here / Guides / Reference). */
+.sidebar-content .large {
+  font-size: var(--sl-text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+/* Links. */
+.sidebar-content a {
+  font-size: var(--sl-text-base);
+  padding-block: 0.6rem;
+  border-radius: 0.5rem;
+}
+/* Breathing room between items and between groups. */
+.sidebar-content ul li {
+  margin-top: 0.3rem;
+}
+.sidebar-content > ul > li + li,
+.sidebar-content .top-level > li + li {
+  margin-top: 1.5rem;
+}
