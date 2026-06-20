@@ -24,6 +24,9 @@
     "dev": "tsup --watch",
     "test": "bun test",
     "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "prepare": "lefthook install",
     "prepublishOnly": "bun run typecheck && bun run test && bun run build"
   },
   "keywords": [
@@ -61,8 +64,10 @@
     "drizzle-orm": ">=0.44.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
     "@cloudflare/workers-types": "^4.20240620.0",
     "drizzle-orm": "^0.45.2",
+    "lefthook": "^2.1.9",
     "tsup": "^8.3.5",
     "typescript": "^5.6.3"
   }
