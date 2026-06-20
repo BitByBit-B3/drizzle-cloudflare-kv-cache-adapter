@@ -1,5 +1,24 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#0d0d0d"/>
-  <path d="M16 4C16 4 7.5 13 7.5 19.5C7.5 24.2 11.3 28 16 28C20.7 28 24.5 24.2 24.5 19.5C24.5 13 16 4 16 4Z" fill="#ffffff"/>
-  <path d="M17 11.5L12 18.6H15.4L14.3 24L20 16.1H16.6L17 11.5Z" fill="#0d0d0d"/>
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="14" fill="#0d0d0d"/>
+
+  <!-- Cloudflare: cloud -->
+  <g fill="#ffffff">
+    <circle cx="26" cy="20" r="7"/>
+    <circle cx="38" cy="17" r="9"/>
+    <circle cx="45" cy="22" r="6"/>
+    <rect x="22" y="18" width="25" height="9" rx="4"/>
+  </g>
+
+  <!-- Drizzle: three diagonal slashes (rain) -->
+  <g stroke="#ffffff" stroke-width="3.6" stroke-linecap="round">
+    <line x1="28" y1="31" x2="23" y2="40"/>
+    <line x1="36" y1="31" x2="31" y2="40"/>
+    <line x1="44" y1="31" x2="39" y2="40"/>
+  </g>
+
+  <!-- KV cache: key | value cell -->
+  <rect x="17" y="45" width="30" height="12" rx="5" stroke="#ffffff" stroke-width="2.6"/>
+  <line x1="32" y1="47.5" x2="32" y2="54.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="24.5" cy="51" r="1.9" fill="#ffffff"/>
+  <line x1="37" y1="51" x2="42.5" y2="51" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
 </svg>

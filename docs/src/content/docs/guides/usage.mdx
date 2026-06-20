@@ -22,6 +22,22 @@ const posts = await db
   .$withCache({ config: { ex: 600 } })
 ```
 
+## Tagged queries
+
+Give a query a stable `tag` to cache and invalidate it by name, independent of its tables:
+
+```ts
+const report = await db
+  .select()
+  .from(reportsTable)
+  .$withCache({ tag: 'daily-report' })
+
+// later — drop just that entry:
+await db.$cache.invalidate({ tags: 'daily-report' })
+```
+
+Tagged entries are stored under `{prefix}:t:{tag}` (separate from hashed queries at `{prefix}:q:{hash}`).
+
 ## Cache everything
 
 Set `strategy: 'all'` to cache every read query automatically. Each is invalidated when its tables are mutated through Drizzle.

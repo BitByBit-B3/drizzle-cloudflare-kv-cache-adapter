@@ -28,6 +28,10 @@ await db.$cache.invalidate({ tables: 'users' })
 
 // Multiple tables:
 await db.$cache.invalidate({ tables: ['users', 'posts'] })
+
+// By tag (see Usage → Tagged queries):
+await db.$cache.invalidate({ tags: 'daily-report' })
+await db.$cache.invalidate({ tags: ['daily-report', 'weekly-report'] })
 ```
 
 ## Scope

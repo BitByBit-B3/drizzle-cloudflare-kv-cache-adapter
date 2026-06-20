@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { CloudflareKVCache, cloudflareKVCache } from '../src/index'
+import { type CloudflareKVCache, cloudflareKVCache } from '../src/index'
 import { MockKV } from './kv-mock'
 
 function setup(options?: ConstructorParameters<typeof CloudflareKVCache>[1]) {
@@ -56,6 +56,13 @@ describe('put', () => {
     expect(call?.expirationTtl).toBe(120)
   })
 
+  test('converts a per-query px (ms) ttl to seconds', async () => {
+    const { kv, cache } = setup()
+    await cache.put('h1', [1], [], false, { px: 120_000 })
+    const call = kv.putCalls.find((c) => c.key === 'drizzle:q:h1')
+    expect(call?.expirationTtl).toBe(120)
+  })
+
   test('writes a table index entry per referenced table', async () => {
     const { kv, cache } = setup()
     await cache.put('h1', [1], ['users', 'posts'], false)
@@ -68,7 +75,7 @@ describe('put', () => {
     await cache.put('h1', [1], ['users'], false)
     await cache.put('h1', [2], ['users'], false)
     const index = JSON.parse(kv.store.get('drizzle:tindex:users')!.value)
-    expect(index).toEqual(['h1'])
+    expect(index).toEqual(['drizzle:q:h1'])
   })
 
   test('skips index writes when no tables are referenced', async () => {
@@ -111,10 +118,43 @@ describe('onMutate', () => {
     expect(await cache.get('h1', ['users'], false)).toBeUndefined()
   })
 
-  test('is a no-op when no tables are given', async () => {
-    const { kv, cache } = setup()
+  test('is a no-op when no tables or tags are given', async () => {
+    const { cache } = setup()
     await cache.put('h1', [1], ['users'], false)
     await cache.onMutate({ tables: [] })
     expect(await cache.get('h1', ['users'], false)).toEqual([1])
+  })
+})
+
+describe('tags', () => {
+  test('stores tagged entries under the tag namespace', async () => {
+    const { kv, cache } = setup()
+    await cache.put('reports', [1], [], true)
+    expect(kv.store.has('drizzle:t:reports')).toBe(true)
+    expect(await cache.get('reports', [], true)).toEqual([1])
+  })
+
+  test('keeps tag and query namespaces separate for the same key', async () => {
+    const { cache } = setup()
+    await cache.put('dup', ['query'], [], false)
+    await cache.put('dup', ['tag'], [], true)
+    expect(await cache.get('dup', [], false)).toEqual(['query'])
+    expect(await cache.get('dup', [], true)).toEqual(['tag'])
+  })
+
+  test('invalidates a tagged entry on mutate by tag', async () => {
+    const { cache } = setup()
+    await cache.put('reports', [1], [], true)
+    await cache.onMutate({ tags: 'reports' })
+    expect(await cache.get('reports', [], true)).toBeUndefined()
+  })
+
+  test('accepts an array of tags', async () => {
+    const { cache } = setup()
+    await cache.put('a', [1], [], true)
+    await cache.put('b', [2], [], true)
+    await cache.onMutate({ tags: ['a', 'b'] })
+    expect(await cache.get('a', [], true)).toBeUndefined()
+    expect(await cache.get('b', [], true)).toBeUndefined()
   })
 })

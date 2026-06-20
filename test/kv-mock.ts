@@ -14,18 +14,14 @@ export class MockKV {
   readonly store = new Map<string, StoredEntry>()
   readonly putCalls: Array<{ key: string; expirationTtl?: number }> = []
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: KV mock returns parsed JSON, raw text, or null
   async get(key: string, _type?: 'json' | 'text'): Promise<any> {
     const entry = this.store.get(key)
     if (!entry) return null
     return _type === 'json' ? JSON.parse(entry.value) : entry.value
   }
 
-  async put(
-    key: string,
-    value: string,
-    options?: { expirationTtl?: number },
-  ): Promise<void> {
+  async put(key: string, value: string, options?: { expirationTtl?: number }): Promise<void> {
     this.store.set(key, { value, expirationTtl: options?.expirationTtl })
     this.putCalls.push({ key, expirationTtl: options?.expirationTtl })
   }

@@ -21,12 +21,31 @@ bun add drizzle-cloudflare-kv-cache-adapter
 
 ## Setup
 
-Bind a KV namespace in `wrangler.toml`:
+Create a KV namespace (if you don't have one):
+
+```sh
+wrangler kv namespace create CACHE
+```
+
+Bind it in your Wrangler config — `wrangler.toml`:
 
 ```toml
 [[kv_namespaces]]
 binding = "CACHE"
 id = "<your-kv-namespace-id>"
+```
+
+…or `wrangler.jsonc`:
+
+```jsonc
+{
+  "kv_namespaces": [
+    {
+      "binding": "CACHE",
+      "id": "<your-kv-namespace-id>"
+    }
+  ]
+}
 ```
 
 Wire it into Drizzle (D1 example):

@@ -70,7 +70,7 @@
 .hero-code {
   margin: 0;
   width: 100%;
-  max-width: 44rem;
+  max-width: 52rem;
   border: 1px solid var(--sl-color-gray-5);
   border-radius: 0.85rem;
   background: color-mix(in oklab, var(--sl-color-black) 55%, var(--sl-color-gray-6));
@@ -129,9 +129,12 @@
 }
 .hero-code code {
   font:
-    1.02rem/1.85 var(--sl-font-mono, ui-monospace, monospace);
+    1.12rem/1.9 var(--sl-font-mono, ui-monospace, monospace);
   color: #d6dce5;
   white-space: pre;
+}
+.hero-code pre {
+  padding: 1.35rem 1.5rem;
 }
 /* Syntax tokens — muted palette, readable on the dark panel. */
 .hero-code .k {

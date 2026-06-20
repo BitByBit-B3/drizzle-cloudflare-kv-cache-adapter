@@ -48,6 +48,10 @@ import {
 
 Passed through Drizzle's `.$withCache({ config })`:
 
-| Field | Type     | Description                                          |
-| ----- | -------- | --------------------------------------------------- |
-| `ex`  | `number` | TTL in seconds for this query. Clamped to ≥ 60.     |
+| Field | Type     | Description                                                   |
+| ----- | -------- | ------------------------------------------------------------ |
+| `ex`  | `number` | TTL in **seconds**. Clamped to ≥ 60.                         |
+| `px`  | `number` | TTL in **milliseconds**; converted to seconds, clamped to ≥ 60. |
+| `tag` | `string` | Cache under a stable tag; invalidate via `invalidate({ tags })`. |
+
+`ex` takes precedence over `px`. Absolute-time options (`exat` / `pxat`) aren't expressible as a KV relative TTL and are ignored.
