@@ -4,6 +4,24 @@ description: Cloudflare KV query cache adapter for Drizzle ORM — cache read-he
 template: splash
 hero:
   tagline: Cloudflare KV query caching for Drizzle ORM. Cache read-heavy queries on Workers &amp; D1 — no Redis, no Upstash, no extra infra.
+  image:
+    html: |
+      <figure class="hero-code">
+        <figcaption>
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="fname">worker.ts</span>
+          <button type="button" class="copy" aria-label="Copy code" onclick="navigator.clipboard.writeText(this.closest('figure').querySelector('code').innerText);const t=this.textContent;this.textContent='Copied';this.classList.add('ok');setTimeout(()=>{this.textContent=t;this.classList.remove('ok')},1200)">Copy</button>
+        </figcaption>
+        <pre><code><span class="k">import</span> { drizzle } <span class="k">from</span> <span class="s">'drizzle-orm/d1'</span>
+      <span class="k">import</span> { cloudflareKVCache } <span class="k">from</span> <span class="s">'drizzle-cloudflare-kv-cache-adapter'</span>
+
+      <span class="k">const</span> db = <span class="f">drizzle</span>(env.DB, {
+        cache: <span class="f">cloudflareKVCache</span>(env.CACHE),
+      })
+
+      <span class="c">// cached, edge-local, auto-invalidated</span>
+      <span class="k">const</span> users = <span class="k">await</span> db.<span class="f">select</span>().<span class="f">from</span>(usersTable).<span class="f">$withCache</span>()</code></pre>
+      </figure>
   actions:
     - text: Get started
       link: /getting-started/
@@ -35,12 +53,3 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
     typed.
   </Card>
 </CardGrid>
-
-```ts
-import { drizzle } from 'drizzle-orm/d1'
-import { cloudflareKVCache } from 'drizzle-cloudflare-kv-cache-adapter'
-
-const db = drizzle(env.DB, { cache: cloudflareKVCache(env.CACHE) })
-
-const users = await db.select().from(usersTable).$withCache()
-```

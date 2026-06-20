@@ -9,11 +9,15 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Drizzle KV Cache',
+      favicon: '/favicon.svg',
       description:
         'Cloudflare KV query cache adapter for Drizzle ORM — cache read-heavy queries on Workers/D1 without Redis.',
       social: [{ icon: 'github', label: 'GitHub', href: GITHUB }],
       editLink: { baseUrl: `${GITHUB}/edit/main/docs/` },
       customCss: ['./src/styles/theme.css'],
+      components: {
+        Header: './src/components/Header.astro',
+      },
       lastUpdated: true,
       sidebar: [
         {
