@@ -1,0 +1,55 @@
+---
+title: Drizzle Cloudflare KV Cache
+description: Cloudflare KV query cache adapter for Drizzle ORM — cache read-heavy queries on Workers/D1 without Redis.
+template: splash
+hero:
+  tagline: Cloudflare KV query caching for Drizzle ORM. Cache read-heavy queries on Workers &amp; D1 — no Redis, no Upstash, no extra infra.
+  image:
+    html: |
+      <figure class="hero-code">
+        <figcaption>
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="fname">worker.ts</span>
+          <button type="button" class="copy" aria-label="Copy code" onclick="navigator.clipboard.writeText(this.closest('figure').querySelector('code').innerText);const t=this.textContent;this.textContent='Copied';this.classList.add('ok');setTimeout(()=>{this.textContent=t;this.classList.remove('ok')},1200)">Copy</button>
+        </figcaption>
+        <pre><code><span class="k">import</span> { drizzle } <span class="k">from</span> <span class="s">'drizzle-orm/d1'</span>
+      <span class="k">import</span> { cloudflareKVCache } <span class="k">from</span> <span class="s">'drizzle-cloudflare-kv-cache-adapter'</span>
+
+      <span class="k">const</span> db = <span class="f">drizzle</span>(env.DB, {
+        cache: <span class="f">cloudflareKVCache</span>(env.CACHE),
+      })
+
+      <span class="c">// cached, edge-local, auto-invalidated</span>
+      <span class="k">const</span> users = <span class="k">await</span> db.<span class="f">select</span>().<span class="f">from</span>(usersTable).<span class="f">$withCache</span>()</code></pre>
+      </figure>
+  actions:
+    - text: Get started
+      link: /getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: View on GitHub
+      link: https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Zero extra infra" icon="cloud-download">
+    Reuse the KV namespace you already bind in your Worker. No Redis instance, no
+    connection pool, no cold-start tax.
+  </Card>
+  <Card title="Drop-in adapter" icon="puzzle">
+    Implements Drizzle's native cache interface. Pass it to `drizzle({ cache })`
+    and use `.$withCache()` exactly as documented.
+  </Card>
+  <Card title="Automatic invalidation" icon="random">
+    Writes through Drizzle invalidate every cached query that touches the mutated
+    tables — via a per-table reverse index in KV.
+  </Card>
+  <Card title="Edge-native" icon="rocket">
+    Built for Cloudflare Workers and D1. Tiny, tree-shakeable, ESM-only, fully
+    typed.
+  </Card>
+</CardGrid>

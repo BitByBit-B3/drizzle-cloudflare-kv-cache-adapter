@@ -1,0 +1,107 @@
+---
+import Search from 'virtual:starlight/components/Search'
+import SiteTitle from 'virtual:starlight/components/SiteTitle'
+import SocialIcons from 'virtual:starlight/components/SocialIcons'
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect'
+
+const navLinks = [
+  { label: 'Start here', href: '/introduction/' },
+  { label: 'Guides', href: '/guides/usage/' },
+  { label: 'Reference', href: '/reference/api/' },
+]
+
+// Normalize for active-state matching (Astro base is '/').
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/'
+const sectionOf = (href: string) => href.split('/').filter(Boolean)[0] ?? ''
+const currentSection = sectionOf(path === '/' ? '/' : path + '/')
+---
+
+<div class="header sl-flex">
+  <div class="title-wrapper sl-flex">
+    <SiteTitle />
+  </div>
+
+  <nav class="top-nav sl-hidden md:sl-flex" aria-label="Main">
+    {
+      navLinks.map((link) => {
+        const isCurrent = sectionOf(link.href) === currentSection
+        return (
+          <a href={link.href} aria-current={isCurrent ? 'page' : undefined}>
+            {link.label}
+          </a>
+        )
+      })
+    }
+  </nav>
+
+  <div class="sl-flex search print:hidden">
+    <Search />
+  </div>
+
+  <div class="sl-hidden md:sl-flex right-group print:hidden">
+    <div class="sl-flex social-icons">
+      <SocialIcons />
+    </div>
+    <ThemeSelect />
+  </div>
+</div>
+
+<style>
+  /* Stable flex header — independent of sidebar width, so the search box
+     never shifts between splash and doc pages. */
+  .header {
+    gap: var(--sl-nav-gap);
+    align-items: center;
+    height: 100%;
+  }
+
+  .title-wrapper {
+    overflow: clip;
+    padding: 0.25rem;
+    margin: -0.25rem;
+    min-width: 0;
+    flex: 0 0 auto;
+  }
+
+  .top-nav {
+    gap: 1.25rem;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-inline-start: 0.5rem;
+  }
+  .top-nav a {
+    font-size: var(--sl-text-base);
+    font-weight: 600;
+    color: var(--sl-color-gray-3);
+    text-decoration: none;
+    padding-block: 0.2rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease;
+  }
+  .top-nav a:hover {
+    color: var(--sl-color-white);
+  }
+  .top-nav a[aria-current='page'] {
+    color: var(--sl-color-white);
+    border-bottom-color: var(--sl-color-white);
+  }
+
+  .search {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    max-width: 22rem;
+    margin-inline-start: auto;
+  }
+
+  .right-group,
+  .social-icons {
+    gap: 1rem;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+  .social-icons::after {
+    content: '';
+    height: 2rem;
+    border-inline-end: 1px solid var(--sl-color-gray-5);
+  }
+</style>

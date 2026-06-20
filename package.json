@@ -1,0 +1,74 @@
+{
+  "name": "drizzle-cloudflare-kv-cache-adapter",
+  "version": "0.1.0",
+  "description": "Cloudflare KV query cache adapter for Drizzle ORM, built for Workers, D1, and Cloudflare-native TypeScript apps.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "prepare": "lefthook install",
+    "prepublishOnly": "bun run typecheck && bun run test && bun run build"
+  },
+  "keywords": [
+    "drizzle",
+    "drizzle-orm",
+    "drizzle-cache",
+    "cloudflare",
+    "cloudflare-workers",
+    "cloudflare-kv",
+    "cloudflare-d1",
+    "query-cache",
+    "cache-adapter",
+    "typescript",
+    "serverless",
+    "edge-computing",
+    "workers"
+  ],
+  "author": "BitByBit-B3",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter/issues"
+  },
+  "homepage": "https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "drizzle-orm": ">=0.44.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
+    "@cloudflare/workers-types": "^4.20240620.0",
+    "drizzle-orm": "^0.45.2",
+    "lefthook": "^2.1.9",
+    "tsup": "^8.3.5",
+    "typescript": "^5.6.3"
+  }
+}

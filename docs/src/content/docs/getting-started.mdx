@@ -1,0 +1,88 @@
+---
+title: Getting started
+description: Install the adapter, bind a KV namespace, and wire it into Drizzle.
+---
+
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. **Install the package**
+
+   <Tabs syncKey="pkg">
+     <TabItem label="bun">
+       ```sh
+       bun add drizzle-cloudflare-kv-cache-adapter
+       ```
+     </TabItem>
+     <TabItem label="npm">
+       ```sh
+       npm i drizzle-cloudflare-kv-cache-adapter
+       ```
+     </TabItem>
+     <TabItem label="pnpm">
+       ```sh
+       pnpm add drizzle-cloudflare-kv-cache-adapter
+       ```
+     </TabItem>
+   </Tabs>
+
+   `drizzle-orm >= 0.44.0` is a peer dependency.
+
+2. **Bind a KV namespace** in your Wrangler config:
+
+   <Tabs syncKey="wrangler">
+     <TabItem label="wrangler.toml">
+       ```toml
+       [[kv_namespaces]]
+       binding = "CACHE"
+       id = "<your-kv-namespace-id>"
+       ```
+     </TabItem>
+     <TabItem label="wrangler.jsonc">
+       ```jsonc
+       {
+         "kv_namespaces": [
+           {
+             "binding": "CACHE",
+             "id": "<your-kv-namespace-id>"
+           }
+         ]
+       }
+       ```
+     </TabItem>
+   </Tabs>
+
+   Don't have one yet? Create it:
+
+   ```sh
+   wrangler kv namespace create CACHE
+   ```
+
+3. **Wire it into Drizzle**
+
+   ```ts
+   import { drizzle } from 'drizzle-orm/d1'
+   import { cloudflareKVCache } from 'drizzle-cloudflare-kv-cache-adapter'
+
+   export default {
+     async fetch(request: Request, env: Env) {
+       const db = drizzle(env.DB, {
+         cache: cloudflareKVCache(env.CACHE),
+       })
+
+       const users = await db.select().from(usersTable).$withCache()
+       return Response.json(users)
+     },
+   }
+   ```
+
+4. **Deploy**
+
+   ```sh
+   wrangler deploy
+   ```
+
+</Steps>
+
+That's it. Continue to [Usage](/guides/usage/) for caching strategies and TTLs.

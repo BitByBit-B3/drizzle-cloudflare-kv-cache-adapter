@@ -1,0 +1,199 @@
+/* Monochrome black & white theme. */
+:root {
+  --sl-color-accent-low: #2a2a2a;
+  --sl-color-accent: #e7e7e7;
+  --sl-color-accent-high: #ffffff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #ededed;
+  --sl-color-gray-2: #c2c2c2;
+  --sl-color-gray-3: #8b8b8b;
+  --sl-color-gray-4: #585858;
+  --sl-color-gray-5: #383838;
+  --sl-color-gray-6: #252525;
+  --sl-color-black: #121212;
+  /* Neutralize Starlight's themed text-accent links to plain white. */
+  --sl-color-text-accent: #ffffff;
+}
+
+:root[data-theme='light'] {
+  --sl-color-accent-low: #dcdcdc;
+  --sl-color-accent: #1a1a1a;
+  --sl-color-accent-high: #000000;
+  --sl-color-white: #000000;
+  --sl-color-gray-1: #1a1a1a;
+  --sl-color-gray-2: #2b2b2b;
+  --sl-color-gray-3: #5c5c5c;
+  --sl-color-gray-4: #8b8b8b;
+  --sl-color-gray-5: #d8d8d8;
+  --sl-color-gray-6: #f0f0f0;
+  --sl-color-gray-7: #f9f9f9;
+  --sl-color-black: #ffffff;
+  --sl-color-text-accent: #000000;
+}
+
+/* Soft monochrome glow behind the splash hero. */
+.hero {
+  position: relative;
+  --glow: color-mix(in oklab, var(--sl-color-white) 12%, transparent);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 460px;
+  background: radial-gradient(50% 60% at 60% 0%, var(--glow), transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero h1 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--sl-color-white), var(--sl-color-gray-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+:root[data-theme='light'] .hero h1 {
+  background: linear-gradient(180deg, var(--sl-color-black), var(--sl-color-gray-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Slightly rounder cards. */
+.card {
+  border-radius: 0.75rem;
+}
+
+/* Hero code panel — copyable snippet beside the tagline. */
+.hero-code {
+  margin: 0;
+  width: 100%;
+  max-width: 52rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.85rem;
+  background: color-mix(in oklab, var(--sl-color-black) 55%, var(--sl-color-gray-6));
+  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  text-align: left;
+}
+.hero-code figcaption {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  background: color-mix(in oklab, var(--sl-color-black) 35%, var(--sl-color-gray-6));
+}
+.hero-code .dots {
+  display: inline-flex;
+  gap: 0.34rem;
+}
+.hero-code .dots i {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 50%;
+  background: var(--sl-color-gray-4);
+}
+.hero-code .fname {
+  font:
+    600 0.8rem/1 var(--sl-font-mono, ui-monospace, monospace);
+  color: var(--sl-color-gray-3);
+}
+.hero-code .copy {
+  margin-inline-start: auto;
+  padding: 0.28rem 0.66rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--sl-color-gray-2);
+  background: transparent;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.45rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.hero-code .copy:hover {
+  color: var(--sl-color-white);
+  border-color: var(--sl-color-gray-3);
+}
+.hero-code .copy.ok {
+  color: var(--sl-color-white);
+  border-color: var(--sl-color-white);
+}
+.hero-code pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+}
+.hero-code code {
+  font:
+    1.12rem/1.9 var(--sl-font-mono, ui-monospace, monospace);
+  color: #d6dce5;
+  white-space: pre;
+}
+.hero-code pre {
+  padding: 1.35rem 1.5rem;
+}
+/* Syntax tokens — muted palette, readable on the dark panel. */
+.hero-code .k {
+  color: #c4a7ff;
+  font-weight: 600;
+}
+.hero-code .s {
+  color: #97d8a4;
+}
+.hero-code .f {
+  color: #7fc4f0;
+}
+.hero-code .c {
+  color: #6f7681;
+  font-style: italic;
+}
+:root[data-theme='light'] .hero-code {
+  background: var(--sl-color-gray-7);
+}
+:root[data-theme='light'] .hero-code figcaption {
+  background: var(--sl-color-gray-6);
+}
+:root[data-theme='light'] .hero-code code {
+  color: #2b2f36;
+}
+:root[data-theme='light'] .hero-code .k {
+  color: #7c3aed;
+}
+:root[data-theme='light'] .hero-code .s {
+  color: #197d3a;
+}
+:root[data-theme='light'] .hero-code .f {
+  color: #1f6fb2;
+}
+:root[data-theme='light'] .hero-code .c {
+  color: #8b8b8b;
+}
+
+/* Bigger, airier sidebar — fills the sparse nav. */
+.sidebar-content {
+  padding-top: 0.5rem;
+}
+/* Section group labels (Start here / Guides / Reference). */
+.sidebar-content .large {
+  font-size: var(--sl-text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+/* Links. */
+.sidebar-content a {
+  font-size: var(--sl-text-base);
+  padding-block: 0.6rem;
+  border-radius: 0.5rem;
+}
+/* Breathing room between items and between groups. */
+.sidebar-content ul li {
+  margin-top: 0.3rem;
+}
+.sidebar-content > ul > li + li,
+.sidebar-content .top-level > li + li {
+  margin-top: 1.5rem;
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "drizzle-kv-cache-docs",
+  "account_id": "8f0203259905d8923687286c84921e6c",
+  "compatibility_date": "2026-06-20",
+  // Static-assets-only Worker: serves the Astro build, no server script needed.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "drizzle-kv-cache.bbyb.dev",
+      "custom_domain": true
+    }
+  ]
+}

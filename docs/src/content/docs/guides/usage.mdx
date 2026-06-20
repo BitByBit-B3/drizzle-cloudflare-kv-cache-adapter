@@ -1,0 +1,79 @@
+---
+title: Usage
+description: Explicit vs. cache-everything strategies, and per-query TTLs.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Explicit caching (default)
+
+Only queries you opt in with `.$withCache()` are cached:
+
+```ts
+const db = drizzle(env.DB, { cache: cloudflareKVCache(env.CACHE) })
+
+// Cached with the default TTL (300s):
+const users = await db.select().from(usersTable).$withCache()
+
+// Custom TTL (seconds) for this query:
+const posts = await db
+  .select()
+  .from(postsTable)
+  .$withCache({ config: { ex: 600 } })
+```
+
+## Tagged queries
+
+Give a query a stable `tag` to cache and invalidate it by name, independent of its tables:
+
+```ts
+const report = await db
+  .select()
+  .from(reportsTable)
+  .$withCache({ tag: 'daily-report' })
+
+// later — drop just that entry:
+await db.$cache.invalidate({ tags: 'daily-report' })
+```
+
+Tagged entries are stored under `{prefix}:t:{tag}` (separate from hashed queries at `{prefix}:q:{hash}`).
+
+## Cache everything
+
+Set `strategy: 'all'` to cache every read query automatically. Each is invalidated when its tables are mutated through Drizzle.
+
+```ts
+const db = drizzle(env.DB, {
+  cache: cloudflareKVCache(env.CACHE, { strategy: 'all' }),
+})
+
+// No .$withCache() needed — this is cached automatically:
+const users = await db.select().from(usersTable)
+```
+
+## TTLs
+
+<Tabs>
+  <TabItem label="Per query">
+    ```ts
+    db.select().from(t).$withCache({ config: { ex: 600 } }) // 600s
+    ```
+  </TabItem>
+  <TabItem label="Default for all">
+    ```ts
+    cloudflareKVCache(env.CACHE, { defaultTtlSeconds: 120 })
+    ```
+  </TabItem>
+</Tabs>
+
+:::caution
+Cloudflare KV enforces a **60-second minimum** `expirationTtl`. Any TTL below 60s — default or per-query — is clamped up to 60.
+:::
+
+## Sharing one namespace across apps
+
+Use `prefix` to namespace keys so multiple apps (or environments) can safely share a single KV namespace:
+
+```ts
+cloudflareKVCache(env.CACHE, { prefix: 'myapp:prod' })
+```
