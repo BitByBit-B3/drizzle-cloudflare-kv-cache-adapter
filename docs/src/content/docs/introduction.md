@@ -33,3 +33,7 @@ Drizzle's cache layer ships with a Redis/Upstash adapter out of the box. On Clou
 
 - `drizzle-orm >= 0.44.0`
 - A bound `KVNamespace` in your Worker (`env.CACHE` or similar).
+
+## Disclaimer
+
+This is an independent, community-maintained project. It is **not affiliated with, endorsed by, or sponsored by** Drizzle ORM or Cloudflare, Inc. "Drizzle", "Cloudflare", "Cloudflare Workers", "Workers KV", and "D1" are trademarks of their respective owners and are used here for identification purposes only.

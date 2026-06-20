@@ -143,6 +143,10 @@ bun run build
 
 Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for the dev setup and PR workflow, and our [Code of Conduct](./CODE_OF_CONDUCT.md). Notable changes are tracked in [CHANGELOG.md](./CHANGELOG.md).
 
+## Disclaimer
+
+This is an independent, community-maintained project. It is **not affiliated with, endorsed by, or sponsored by** Drizzle ORM or Cloudflare, Inc. "Drizzle", "Cloudflare", "Cloudflare Workers", "Workers KV", and "D1" are trademarks of their respective owners and are used here for identification purposes only.
+
 ## License
 
 [MIT](./LICENSE) © BitByBit-B3
