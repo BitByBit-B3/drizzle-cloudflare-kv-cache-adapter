@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-06-20
+
 ### Added
 
 - `cloudflareKVCache(kv, options?)` factory and `CloudflareKVCache` class — a
@@ -19,4 +21,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   60-second minimum; configurable `defaultTtlSeconds` and key `prefix`.
 - Documentation site (Astro + Starlight) deployed to Cloudflare Workers.
 
-[Unreleased]: https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter/commits/main
+[Unreleased]: https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter/releases/tag/v0.1.0
