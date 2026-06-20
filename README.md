@@ -4,7 +4,14 @@
 
 # Drizzle Cloudflare KV Cache Adapter
 
+[![npm version](https://img.shields.io/npm/v/drizzle-cloudflare-kv-cache-adapter.svg?logo=npm)](https://www.npmjs.com/package/drizzle-cloudflare-kv-cache-adapter)
+[![npm downloads](https://img.shields.io/npm/dm/drizzle-cloudflare-kv-cache-adapter.svg)](https://www.npmjs.com/package/drizzle-cloudflare-kv-cache-adapter)
+[![CI](https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter/actions/workflows/ci.yml/badge.svg)](https://github.com/BitByBit-B3/drizzle-cloudflare-kv-cache-adapter/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/npm/l/drizzle-cloudflare-kv-cache-adapter.svg)](./LICENSE)
+
 Cloudflare KV query caching for Drizzle ORM — cache read-heavy Drizzle queries on Workers/D1 without adding Redis.
+
+📦 **[npm](https://www.npmjs.com/package/drizzle-cloudflare-kv-cache-adapter)** · 📖 **[Docs](https://drizzle-kv-cache.bbyb.dev)**
 
 A [Cloudflare KV](https://developers.cloudflare.com/kv/)-backed implementation of Drizzle ORM's [cache](https://orm.drizzle.team/docs/cache) interface. Designed for Cloudflare Workers, D1, and read-heavy serverless apps that want Drizzle query caching without standing up Redis or Upstash.
 
