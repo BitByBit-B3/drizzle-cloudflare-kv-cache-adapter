@@ -132,6 +132,10 @@ bun run typecheck
 bun run build
 ```
 
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for the dev setup and PR workflow, and our [Code of Conduct](./CODE_OF_CONDUCT.md). Notable changes are tracked in [CHANGELOG.md](./CHANGELOG.md).
+
 ## License
 
 [MIT](./LICENSE) © BitByBit-B3
