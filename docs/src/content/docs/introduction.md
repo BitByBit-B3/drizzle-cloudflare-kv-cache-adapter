@@ -5,6 +5,8 @@ description: What the Drizzle Cloudflare KV cache adapter is, and when to reach 
 
 ![Drizzle Cloudflare KV Cache Adapter — Cloudflare KV-backed query caching for Drizzle ORM](../../assets/banner.png)
 
+Available on npm as [`drizzle-cloudflare-kv-cache-adapter`](https://www.npmjs.com/package/drizzle-cloudflare-kv-cache-adapter).
+
 A [Cloudflare KV](https://developers.cloudflare.com/kv/)-backed implementation of Drizzle ORM's [cache](https://orm.drizzle.team/docs/cache) interface. It caches read-heavy Drizzle queries at the edge using the KV namespace you already have bound to your Worker.
 
 :::note
@@ -31,3 +33,7 @@ Drizzle's cache layer ships with a Redis/Upstash adapter out of the box. On Clou
 
 - `drizzle-orm >= 0.44.0`
 - A bound `KVNamespace` in your Worker (`env.CACHE` or similar).
+
+## Disclaimer
+
+This is an independent, community-maintained project. It is **not affiliated with, endorsed by, or sponsored by** Drizzle ORM or Cloudflare, Inc. "Drizzle", "Cloudflare", "Cloudflare Workers", "Workers KV", and "D1" are trademarks of their respective owners and are used here for identification purposes only.
