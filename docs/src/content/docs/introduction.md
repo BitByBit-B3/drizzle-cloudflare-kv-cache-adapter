@@ -37,3 +37,5 @@ Drizzle's cache layer ships with a Redis/Upstash adapter out of the box. On Clou
 ## Disclaimer
 
 This is an independent, community-maintained project. It is **not affiliated with, endorsed by, or sponsored by** Drizzle ORM or Cloudflare, Inc. "Drizzle", "Cloudflare", "Cloudflare Workers", "Workers KV", and "D1" are trademarks of their respective owners and are used here for identification purposes only.
+
+This adapter exists because of an open upstream feature request — [drizzle-team/drizzle-orm#5758](https://github.com/drizzle-team/drizzle-orm/issues/5758), which asks for a first-party Cloudflare KV cache adapter in Drizzle ORM. At the time of writing that request is still open and Drizzle does **not** ship an official Cloudflare KV adapter. This package is an independent implementation of Drizzle's public [cache interface](https://orm.drizzle.team/docs/cache) that fills the gap in the meantime; it is **not** the first-party adapter discussed in that issue. If an official adapter ever lands upstream, we'll help users migrate to it.

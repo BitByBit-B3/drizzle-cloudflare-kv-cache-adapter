@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Docs: note the upstream origin ([drizzle-team/drizzle-orm#5758](https://github.com/drizzle-team/drizzle-orm/issues/5758))
+  in the README and docs disclaimer, clarifying this is an independent adapter
+  and not the first-party Cloudflare KV adapter requested upstream.
+
 ## [0.1.0] - 2026-06-20
 
 ### Added
